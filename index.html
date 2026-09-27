@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security Warning</title>
+<style>
+body{background:#050505;color:#00ff41;font-family:monospace;text-align:center;padding:60px 15px}
+h1{color:#ff2020;font-size:34px} h2{color:white;font-size:25px}
+#status{font-size:20px;margin:30px 0}
+.box{width:90%;max-width:500px;height:25px;border:2px solid #00ff41;margin:auto}
+#progress{width:0%;height:100%;background:#00ff41}
+#percent{font-size:22px;margin:15px}
+#warning{display:none;color:#ff3030;font-size:20px;margin-top:30px}
+.details{color:#aaa;margin-top:25px;line-height:1.8}
+</style>
+</head>
+<body>
+<h1>⚠ SECURITY ALERT</h1>
+<h2>Device Security Scan</h2>
+<p>Target: ORCHY</p>
+<div id="status">Initializing security scan...</div>
+<div class="box"><div id="progress"></div></div>
+<div id="percent">0%</div>
+<div id="warning">⚠ UNAUTHORIZED ACTIVITY DETECTED</div>
+<div class="details">
+System integrity check in progress...<br>
+Checking system files...<br>
+Checking security status...<br>
+Analyzing device environment...
+</div>
+<script>
+let progress=0;
+const messages=[
+"Initializing security scan...",
+"Checking system files...",
+"Analyzing security status...",
+"Scanning device environment...",
+"Detecting unusual activity...",
+"Verifying system integrity..."
+];
+let messageIndex=0;
+let timer=setInterval(function(){
+progress++;
+document.getElementById("progress").style.width=progress+"%";
+document.getElementById("percent").innerText=progress+"%";
+if(progress%15===0 && messageIndex<messages.length){
+document.getElementById("status").innerText=messages[messageIndex++];
+}
+if(progress>=100){
+clearInterval(timer);
+document.getElementById("status").innerText="Security scan completed.";
+document.getElementById("warning").style.display="block";
+}
+},70);
+</script>
+</body>
+</html>
